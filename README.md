@@ -1,9 +1,10 @@
 # MSTRandomTeleport
+[![Java CI with Maven](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml)
 
-**Version:** 1.15.0
-**Author:** MSTendo64  
-**API Version:** 1.16+  
-**Java Version:** 1.8+
+**Версия:** 1.15.0  
+**Автор:** MSTendo64  
+**API версия:** 1.16+  
+**Java версия:** 1.8+
 
 ## Description
 
@@ -389,4 +390,4 @@ location_generation_options:
   max_near_point_distance: 60
 ```
 
-**Important:** The `NEAR_REGION` type requires WorldGuard to be installed!
+**Важно:** Для работы типа `NEAR_REGION` требуется установленный WorldGuard!
