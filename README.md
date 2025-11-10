@@ -91,7 +91,7 @@ MSTRandomTeleport is an advanced plugin for random teleportation of players on M
 ## Installation
 
 1. Download the latest version of the plugin
-2. Place the `MSTRandomTeleport-1.0.jar` file in the `plugins/` folder
+2. Place the `MSTRandomTeleport.jar` file in the `plugins/` folder
 3. Restart the server
 4. Configure settings in `plugins/MSTRandomTeleport/config.yml`
 5. Configure channels in `plugins/MSTRandomTeleport/channels/`
