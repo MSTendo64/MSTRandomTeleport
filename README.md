@@ -390,4 +390,4 @@ location_generation_options:
   max_near_point_distance: 60
 ```
 
-**Важно:** Для работы типа `NEAR_REGION` требуется установленный WorldGuard!
+**Important:** WorldGuard must be installed to use the `NEAR_REGION` type!
