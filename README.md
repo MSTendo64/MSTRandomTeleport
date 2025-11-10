@@ -1,10 +1,10 @@
 # MSTRandomTeleport
 [![Java CI with Maven](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml)
 
-**Версия:** 1.15.0  
-**Автор:** MSTendo64  
-**API версия:** 1.16+  
-**Java версия:** 1.8+
+**Version:** 1.15.0  
+**Author:** MSTendo64  
+**API version:** 1.16+  
+**Java version:** 1.8+
 
 ## Description
 
