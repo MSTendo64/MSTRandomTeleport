@@ -1,24 +1,24 @@
 ###
-# Конфигурация темплейтов для каналов.
-# Темплейт - заготовка для канала. При помощи указания его в разделе template: в файле канала вы сможете не указывать дейсвтия и т.п. отдельно
-# В себе темплейт может содержать в себе настройки: цены, генерации локации, кулдаунов, боссбара, партиклов, запретов, избеганий и действий.
-# Каждый параметр темплейта опционален и может быть не указан.
+# Channel template configuration.
+# Template - a template for a channel. By specifying it in the template: section in the channel file, you can avoid specifying actions etc. separately
+# A template can contain settings: costs, location generation, cooldowns, bossbar, particles, restrictions, avoidances and actions.
+# Each template parameter is optional and may not be specified.
 ###
 
-# Темплейт стандартных действий
+# Standard actions template
 default_actions:
   actions:
     pre_teleport:
-      - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &fВы будете телепортированы через %time% Не двигайтесь и не получайте урона. &6(Отменить РТП - /rtp cancel)'
+      - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &fYou will be teleported in %time% Do not move or take damage. &6(Cancel RTP - /rtp cancel)'
       - '[SOUND] BLOCK_NOTE_BLOCK_PLING;1;1'
     on_cooldown:
       3:
-        - '[TITLE] &aТелепорт через &e3...;&r;5;50;10'
+        - '[TITLE] &aTeleport in &e3...;&r;5;50;10'
       2:
-        - '[TITLE] &aТелепорт через &62...;&r;5;50;10'
+        - '[TITLE] &aTeleport in &62...;&r;5;50;10'
       1:
-        - '[TITLE] &aТелепорт через &c1...;&r;5;50;10'
+        - '[TITLE] &aTeleport in &c1...;&r;5;50;10'
     after_teleport:
-      - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aУспешная телепортация! &fВы телепортировались на координаты: &2%x% %y% %z%.'
-      - '[TITLE] &a&lУспех!;&fВы телепортировались на координаты: &2%x% %y% %z%.'
+      - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aSuccessful teleportation! &fYou teleported to coordinates: &2%x% %y% %z%.'
+      - '[TITLE] &a&lSuccess!;&fYou teleported to coordinates: &2%x% %y% %z%.'
       - '[SOUND] ENTITY_PLAYER_LEVELUP;1;1'

@@ -1,88 +1,105 @@
-# Основные настройки
+# Main settings
 main_settings:
-  # Форматирование текста.
-  # LEGACY - цвет через & и hex &#
-  # LEGACY_ADVANCED - улучшенный аналог legacy с поддержкой &## формата hex
-  # MINIMESSAGE - цвет через <цвет>
-  # MINIMESSAGE был добавлен в новых версиях (1.17+)
+  # Text formatting.
+  # LEGACY - color via & and hex &#
+  # LEGACY_ADVANCED - improved legacy with support for &## hex format
+  # MINIMESSAGE - color via <color>
+  # MINIMESSAGE was added in newer versions (1.17+)
   serializer: LEGACY
-  # Команда рандомной телепортации (указывается без /)
+  # Random teleport command (specified without /)
   rtp_command: 'rtp'
-  # Алиасы к команде рандомной телепортации
+  # Aliases for the random teleport command
   rtp_aliases: ['randomteleport', 'msrandomteleport']
-  # Название дефолтного канала.
-  # Указанный канал будет использован в качестве основного при вводе команды /rtp
-  # Если канал не указан - то игроку будет необходимо ввести имя канала вручную
+  # Default channel name.
+  # The specified channel will be used as the main one when entering the /rtp command
+  # If the channel is not specified - the player will need to enter the channel name manually
   default_channel: 'default'
-  # Включить ли поддержку PlaceholderApi?
+  # Enable PlaceholderAPI support?
   papi_support: true
-  # Отправлять ли анонимную статистику (советую не отключать)
+  # Send anonymous statistics (recommended not to disable)
   enable_metrics: true
-  # Проверять ли на наличие обновлений (советую не отключать)
+  # Check for updates (recommended not to disable)
   update_checker: true
-  # Настройки работы с прокси
+  # Proxy settings
   proxy:
-    # Включена ли поддержка прокси
+    # Is proxy support enabled
     enabled: false
-    # Имя сервера в сети
+    # Server name in the network
     server_id: 'server1'
 
-# Каналы рандомной телепортации
-# Вы можете создавать свои каналы, основываясь на уже заранее заготовленных в плагине
+# Random teleport channels
+# You can create your own channels based on the pre-made ones in the plugin
 channels:
-  # Базовый канал (право на использование - rtp.channel.имя_канала т.е. в данном случае rtp.channel.default)
+  # Base channel (permission to use - rtp.channel.channel_name i.e. in this case rtp.channel.default)
   default:
-    # Имя файла, где будет располагаться настройка канала. (Данный файл должен присутствовать в папке channels)
-    # Если имя не указано - настройка осуществляется в самом конфиге (по аналогии с deluxemenus)
+    # Name of the file where the channel configuration will be located. (This file must be present in the channels folder)
+    # If the name is not specified - configuration is done in the config itself (similar to deluxemenus)
     file: 'default.yml'
-  # Канал который будет телепортировать игрока рядом с другими игроками
-  # Дистанция телепортации варьируется, от 30 до 60 блоков от игрока
+  # Channel that will teleport the player near other players
+  # Teleport distance varies from 30 to 60 blocks from the player
   near:
-    # Вы можете вынести все настройки в этот конфиг, если вам так будет проще.
+    # You can put all settings in this config if it's easier for you.
     file: 'near.yml'
-  # Канал который будет телепортировать игрока рядом с регионами
-  # Дистанция телепортации варьируется, от 30 до 60 блоков от игрока
+  # Channel that will teleport the player near regions
+  # Teleport distance varies from 30 to 60 blocks from the player
   base:
     file: 'base.yml'
 
-# Сообщения плагина (сообщения от prefix до fail_to_find_location могут применяться к каналам)
-# Формат хекса - &#IIIDDD
-# Если вы хотите отключить сообщение - укажите ''
+# Plugin messages (messages from prefix to fail_to_find_location can be applied to channels)
+# Hex format - &#IIIDDD
+# If you want to disable a message - specify ''
 messages:
   prefix: '&7&l(&5&lMSTRandomTeleport&7&l) &6»&r'
-  # Сообщения ниже могут быть применены так же и к каналам
-  no_perms: '%prefix% &cУ вас не достаточно прав на использование данного канала.'
-  invalid_world: '%prefix% &fВы не можете использовать данный канал рандомной телепортации в этом мире.'
-  not_enough_players: '%prefix% &cНа сервере не достаточно игроков чтобы телепортироваться по данному каналу. Нужно: &6%required% игроков.'
-  not_enough_money: '%prefix% &cУ вас не достаточно денег чтобы телепортироваться по данному каналу. Стоимость: &6%required% монет.'
-  not_enough_hunger: '%prefix% &cУ вас не достаточно очков голода чтобы телепортироваться по данному каналу. Необходимо: &6%required%.'
-  not_enough_experience: '%prefix% &cУ вас не достаточно очков опыта чтобы телепортироваться по данному каналу. Необходимо: &6%required%.'
-  cooldown: '%prefix% &fВы еще не можете телепортироваться по данному каналу. Подождите еще &6%time%'
-  moved_on_teleport: '%prefix% &cВы двинулись! Телепортация отменена.'
-  teleported_on_teleport: '%prefix% &cВы телепортировались в процессе РТП! Телепортация отменена.'
-  damaged_on_teleport: '%prefix% &cВы получили урон! Телепортация отменена.'
-  damaged_other_on_teleport: '%prefix% &cВы нанесли урон! Телепортация отменена.'
-  fail_to_find_location: '%prefix% &6Не удалось подобрать необходимую локацию. Попробуйте снова позже!'
-  # Далее идут сообщения команды rtp и т.д.
-  incorrect_channel: '%prefix% &cУказанного канала рандомной телепортации не существует!'
-  channel_not_specified: '%prefix% &cВам необходимо указать канал рандомной телепортации!'
-  canceled: '%prefix% &aТелепортация отменена!'
-  # Заполнители плейсхолдеров PlaceholderAPI
+  # The following messages can also be applied to channels
+  no_perms: '%prefix% &cYou do not have permission to use this channel.'
+  invalid_world: '%prefix% &fYou cannot use this random teleport channel in this world.'
+  not_enough_players: '%prefix% &cThere are not enough players on the server to teleport via this channel. Required: &6%required% players.'
+  not_enough_money: '%prefix% &cYou do not have enough money to teleport via this channel. Cost: &6%required% coins.'
+  not_enough_hunger: '%prefix% &cYou do not have enough hunger points to teleport via this channel. Required: &6%required%.'
+  not_enough_experience: '%prefix% &cYou do not have enough experience points to teleport via this channel. Required: &6%required%.'
+  cooldown: '%prefix% &fYou cannot teleport via this channel yet. Please wait &6%time%'
+  moved_on_teleport: '%prefix% &cYou moved! Teleportation cancelled.'
+  teleported_on_teleport: '%prefix% &cYou teleported during RTP! Teleportation cancelled.'
+  damaged_on_teleport: '%prefix% &cYou took damage! Teleportation cancelled.'
+  damaged_other_on_teleport: '%prefix% &cYou dealt damage! Teleportation cancelled.'
+  fail_to_find_location: '%prefix% &6Failed to find a suitable location. Please try again later!'
+  # Command messages
+  incorrect_channel: '%prefix% &cThe specified random teleport channel does not exist!'
+  channel_not_specified: '%prefix% &cYou must specify a random teleport channel!'
+  canceled: '%prefix% &aTeleportation cancelled!'
+  # PlaceholderAPI placeholders
   placeholders:
-    no_cooldown: '&aКулдаун отсутствует!'
-    no_value: '&cОтсутствует'
-    # Плейсхолдеры времени
+    no_cooldown: '&aNo cooldown!'
+    no_value: '&cNot available'
+    # Time placeholders
     time:
-      hours: ' ч. '
-      minutes: ' мин. '
-      seconds: ' сек. '
-  # Раздел для админских команд
+      hours: ' h '
+      minutes: ' m '
+      seconds: ' s '
+  # Admin commands section
   admin:
-    reload: '%prefix% &aПлагин успешно перезагружен!'
-    unknown_argument: '%prefix% &cВы ввели недопустимы(й/е) аргумент(ы) к команде!'
-    player_not_found: '%prefix% &cУказанный игрок не найден!'
+    reload: '%prefix% &aPlugin successfully reloaded!'
+    unknown_argument: '%prefix% &cYou entered an invalid argument(s) to the command!'
+    player_not_found: '%prefix% &cThe specified player was not found!'
     admin_help: |-
-      %prefix% Помощь по админ.командам.
-      &a/rtp admin reload &f- перезагрузить плагин
-      &a/rtp admin forceteleport <игрок> <канал> &8<force> &f- телепортировать игрока по указанному каналу
+      %prefix% Admin commands help.
+      &a/rtp admin reload &f- reload the plugin
+      &a/rtp admin forceteleport <player> <channel> &8<force> &f- teleport a player via the specified channel
+  # Console messages
+  console:
+    worldguard_connected: '&5WorldGuard connected!'
+    economy_connected: '&6Economy connected!'
+    permissions_connected: '&aPermissions manager connected!'
+    placeholders_connected: '&ePlaceholders connected!'
+    must_be_player: 'You must be a player!'
+    debug_toggled: '&7Debug toggled to: &%status%%value%'
+    update_check_complete: '&aUpdate check completed. Version: &b%version%'
+    download_progress: '&aDownloading: &e%downloaded%KB&7/&e%total%KB &7(&e%percentage%&7%)'
+    channel_skipped_no_worldguard: '&cChannel &e\'%channel%\' &cuses type NEAR_REGION, but WorldGuard is not installed! Channel will be skipped.'
+    near_region_no_worldguard: '&cAttempt to use NEAR_REGION channel without WorldGuard for player &e%player%&c. Teleportation cancelled.'
+    update_check:
+      latest: '&aYou are using the latest version of the plugin!'
+      outdated: '&aYou are using an outdated version of the plugin!'
+      download_here: '&aYou can download the new version here:'
+      update_command: '&aOr update the plugin using &b/rtp admin update'
   

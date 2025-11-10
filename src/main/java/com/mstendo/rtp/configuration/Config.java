@@ -82,11 +82,33 @@ public class Config {
     ConfigurationSection placeholders = messages.getConfigurationSection("placeholders");
     this
       
-      .placeholderMessages = new PlaceholderMessages(Utils.COLORIZER.colorize(placeholders.getString("no_cooldown", "&aКулдаун отсутствует!")), Utils.COLORIZER.colorize(placeholders.getString("no_value", "&cОтсутствует")));
+      .placeholderMessages = new PlaceholderMessages(Utils.COLORIZER.colorize(placeholders.getString("no_cooldown", "&aNo cooldown!")), Utils.COLORIZER.colorize(placeholders.getString("no_value", "&cNot available")));
     ConfigurationSection time = placeholders.getConfigurationSection("time");
-    timeHours = Utils.COLORIZER.colorize(time.getString("hours", " ч."));
-    timeMinutes = Utils.COLORIZER.colorize(time.getString("minutes", " мин."));
-    timeSeconds = Utils.COLORIZER.colorize(time.getString("seconds", " сек."));
+    timeHours = Utils.COLORIZER.colorize(time.getString("hours", " h "));
+    timeMinutes = Utils.COLORIZER.colorize(time.getString("minutes", " m "));
+    timeSeconds = Utils.COLORIZER.colorize(time.getString("seconds", " s "));
+  }
+  
+  public String getConsoleMessage(String key, String defaultValue) {
+    ConfigurationSection console = this.plugin.getConfig().getConfigurationSection("messages.console");
+    if (console == null) {
+      return Utils.COLORIZER.colorize(defaultValue);
+    }
+    // Handle nested keys like "update_check.latest"
+    String[] keys = key.split("\\.");
+    ConfigurationSection currentSection = console;
+    for (int i = 0; i < keys.length - 1; i++) {
+      currentSection = currentSection.getConfigurationSection(keys[i]);
+      if (currentSection == null) {
+        return Utils.COLORIZER.colorize(defaultValue);
+      }
+    }
+    String message = currentSection.getString(keys[keys.length - 1], defaultValue);
+    return Utils.COLORIZER.colorize(message);
+  }
+  
+  public String getConsoleMessage(String key) {
+    return getConsoleMessage(key, "");
   }
   
   public String getPrefixed(String message, String prefix) {

@@ -1,48 +1,48 @@
-# Обязательный параметр
-name: 'Возле игроков'
-# Обязательный параметр
+# Required parameter
+name: 'Near Players'
+# Required parameter
 type: NEAR_PLAYER
-# Обязательный параметр
+# Required parameter
 active_worlds:
   - 'world'
-# Необязательный параметр
+# Optional parameter
 teleport_to_first_world: true
-# Необязательный параметр
+# Optional parameter
 server_to_move: ''
-# Необязательный параметр
+# Optional parameter
 min_players_to_use: 5
-# Необязательный параметр
+# Optional parameter
 invulnerable_after_teleport: 12
-# Необязательные параметры
+# Optional parameters
 specifications:
   teleport_on_first_join: false
   void_worlds: []
   void_level: 0
   respawn_worlds: []
-# Необязательный параметр
+# Optional parameter
 template: 'default_actions'
-# Необязательные параметры
+# Optional parameters
 costs:
-  # По умолчанию - VAULT
+  # Default - VAULT
   money_type: VAULT
   money_cost: 1000
   hunger_cost: 5
   experience_cost: 10
-# Обязательные параметры, если не указаны в темплейте
+# Required parameters if not specified in template
 location_generation_options:
   shape: SQUARE
-  # Необязательный параметр. По умолчанию - RECTANGULAR
+  # Optional parameter. Default - RECTANGULAR
   gen_format: RECTANGULAR
   min_x: -1000
   max_x: 1000
   min_z: -1000
   max_z: 1000
-  # Необязательные параметры
+  # Optional parameters
   min_near_point_distance: 30
   max_near_point_distance: 90
-  # Необязательный параметр
+  # Optional parameter
   max_location_attempts: 50
-# Необязательные параметры
+# Optional parameters
 cooldown:
   default_cooldown: 60
   group_cooldowns:
@@ -50,20 +50,20 @@ cooldown:
     premium: 10
   use_last_group_cooldown: true
   default_pre_teleport_cooldown: 5
-# Необязательный параметр
+# Optional parameter
 teleport_cooldown: 5
-# Необязательные параметры
+# Optional parameters
 bossbar:
   enabled: true
-  title: '&fТелепортация через: &5%time%'
+  title: '&fTeleportation in: &5%time%'
   color: WHITE
   style: SEGMENTED_12
-# Необязательные параметры
+# Optional parameters
 particles:
-  # Необязательные параметры
+  # Optional parameters
   pre_teleport:
     enabled: false
-    # Можно указывать в виде строки или листа
+    # Can be specified as a string or list
     id: FLAME
     dots: 2
     radius: 1.25
@@ -72,18 +72,18 @@ particles:
     invert: true
     jumping: false
     move_near: true
-  # Необязательные параметры
+  # Optional parameters
   after_teleport:
     enabled: true
     id: FLAME
     count: 45
     radius: 1.25
     particle_speed: 0.0
-# Необязательные параметры
+# Optional parameters
 restrictions:
   move: true
   damage: true
-# Необязательные параметры
+# Optional parameters
 avoid:
   blocks:
     blacklist: true
@@ -95,9 +95,9 @@ avoid:
     list: []
   regions: true
   towns: false
-# Необязательный параметр
-# Отдельные сообщения при использовании канала.
-# Если они не указаны - будут использованы дефолтные, из config.yml
+# Optional parameter
+# Separate messages when using the channel.
+# If not specified - default ones from config.yml will be used
 messages:
   prefix: '&7&l(&5&lMSTRandomTeleport+&7&l) &6»&r'
-  no_perms: '%prefix% &cУ вас не достаточно прав на использование канала телепортации к игрокам.'
+  no_perms: '%prefix% &cYou do not have permission to use the teleport channel to players.'

@@ -86,7 +86,7 @@ public final class MSTRandomTeleport extends JavaPlugin {
       return; 
     if (hasWorldGuard()) {
       WGUtils.setupRtpFlag();
-      this.pluginLogger.info("§5WorldGuard подключён!");
+      this.pluginLogger.info(this.pluginConfig.getConsoleMessage("worldguard_connected", "&5WorldGuard connected!"));
     } 
   }
   
@@ -128,17 +128,16 @@ public final class MSTRandomTeleport extends JavaPlugin {
     if (!mainSettings.getBoolean("update_checker", true))
       return; 
     Utils.checkUpdates(this, version -> {
-          this.pluginLogger.info("§6========================================");
+          this.pluginLogger.info("§6MSTRandomTeleport: ");
           if (getDescription().getVersion().equals(version)) {
-            this.pluginLogger.info("§aВы используете последнюю версию плагина!");
+            this.pluginLogger.info(this.pluginConfig.getConsoleMessage("update_check.latest", "&aYou are using the latest version of the plugin!"));
           } else {
-            this.pluginLogger.info("§aВы используете устаревшую плагина!");
-            this.pluginLogger.info("§aВы можете скачать новую версию здесь:");
+            this.pluginLogger.info(this.pluginConfig.getConsoleMessage("update_check.outdated", "&aYou are using an outdated version of the plugin!"));
+            this.pluginLogger.info(this.pluginConfig.getConsoleMessage("update_check.download_here", "&aYou can download the new version here:"));
             this.pluginLogger.info("§bgithub.com/MSTendo64/MSTRandomTeleport/releases/");
             this.pluginLogger.info("");
-            this.pluginLogger.info("§aИли обновите плагин при помощи §b/rtp admin update");
-          } 
-          this.pluginLogger.info("§6========================================");
+            this.pluginLogger.info(this.pluginConfig.getConsoleMessage("update_check.update_command", "&aOr update the plugin using &b/rtp admin update"));
+          }
         });
   }
   
@@ -146,14 +145,14 @@ public final class MSTRandomTeleport extends JavaPlugin {
     this.economy = getProvider(servicesManager, Economy.class);
     if (this.economy == null)
       return; 
-    this.pluginLogger.info("§6Экономика подключена!");
+    this.pluginLogger.info(this.pluginConfig.getConsoleMessage("economy_connected", "&6Economy connected!"));
   }
   
   private void setupPerms(ServicesManager servicesManager) {
     this.perms = getProvider(servicesManager, Permission.class);
     if (this.perms == null)
       return; 
-    this.pluginLogger.info("§aМенеджер прав подключён!");
+    this.pluginLogger.info(this.pluginConfig.getConsoleMessage("permissions_connected", "&aPermissions manager connected!"));
   }
   
   private <T> T getProvider(ServicesManager servicesManager, Class<T> clazz) {
@@ -167,7 +166,7 @@ public final class MSTRandomTeleport extends JavaPlugin {
     Utils.USE_PAPI = true;
     this.rtpExpansion = new RtpExpansion(this);
     this.rtpExpansion.register();
-    this.pluginLogger.info("§eПлейсхолдеры подключены!");
+    this.pluginLogger.info(this.pluginConfig.getConsoleMessage("placeholders_connected", "&ePlaceholders connected!"));
   }
   
   private void setupProxy(ConfigurationSection mainSettings) {

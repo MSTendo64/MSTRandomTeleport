@@ -133,7 +133,8 @@ public final class RtpManager {
       String name = fileConfiguration.getString("name", "");
       ChannelType type = ChannelType.valueOf(fileConfiguration.getString("type", "DEFAULT").toUpperCase(Locale.ENGLISH));
       if (type == ChannelType.NEAR_REGION && !pluginManager.isPluginEnabled("WorldGuard")) {
-        this.plugin.getPluginLogger().warn("§cКанал '" + channelId + "' использует тип NEAR_REGION, но WorldGuard не установлен! Канал будет пропущен.");
+        this.plugin.getPluginLogger().warn(this.plugin.getPluginConfig().getConsoleMessage("channel_skipped_no_worldguard", "&cChannel &e'%channel%' &cuses type NEAR_REGION, but WorldGuard is not installed! Channel will be skipped.")
+            .replace("%channel%", channelId));
         printDebug("Channel '" + channelId + "' skipped: NEAR_REGION requires WorldGuard");
         continue;
       } 
@@ -295,7 +296,8 @@ public final class RtpManager {
   private Location generateLocationNearRegion(Player player, Settings settings, World world, String playerName) {
     if (this.locationGenerator.getWgLocationGenerator() == null) {
       printDebug("WorldGuard location generator is null for NEAR_REGION channel. This should not happen if channel was loaded correctly.");
-      this.plugin.getPluginLogger().warn("§cПопытка использовать канал типа NEAR_REGION без WorldGuard для игрока " + playerName + ". Телепортация отменена.");
+                  this.plugin.getPluginLogger().warn(this.plugin.getPluginConfig().getConsoleMessage("near_region_no_worldguard", "&cAttempt to use NEAR_REGION channel without WorldGuard for player &e%player%&c. Teleportation cancelled.")
+                      .replace("%player%", playerName));
       return null;
     }
     

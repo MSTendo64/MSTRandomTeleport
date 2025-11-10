@@ -1,214 +1,214 @@
-# Название канала (используется в плейсхолдерах)
-name: 'Стандартный'
-# Режим работы канала
-# DEFAULT - стандартный режим работы (просто телепортирует на рандомные координаты)
-# NEAR_PLAYER - телепортирует игрока рядом с другими игроками (/rtp player проще говоря)
-# NEAR_REGION - телепортирует игрока рядом с регионом worldguard (/rtp base проще говоря)
+# Channel name (used in placeholders)
+name: 'Default'
+# Channel operation mode
+# DEFAULT - standard operation mode (simply teleports to random coordinates)
+# NEAR_PLAYER - teleports the player near other players (simply put /rtp player)
+# NEAR_REGION - teleports the player near a worldguard region (simply put /rtp base)
 type: DEFAULT
-# Миры в которых действует канал
-# Если игрок телепортируется по данному каналу в одном из этих миров - телепорт будет именно в этом мире
+# Worlds in which the channel is active
+# If a player teleports via this channel in one of these worlds - the teleport will be in that world
 active_worlds:
   - 'world'
   - 'world_nether'
   - 'world_the_end'
-# Должен ли канал телепортировать игрока в тот мир, который будет первым в списке active_worlds
-# в случае если игрок пытается телепортироваться через него из другого мира? (полезно в случае, если канал должен вызываться из мира спавна например)
+# Should the channel teleport the player to the world that will be first in the active_worlds list
+# if the player tries to teleport through it from another world? (useful if the channel should be called from the spawn world for example)
 teleport_to_first_world: true
-# На какой сервер в сети будет перемещать канал, если режим proxy включён
-# Имена берутся из конфигурации прокси, однако в основном конфиге плагина также должны быть указаны корректные названия!
-# Если указано '' или же режим proxy не включён - то это не будет иметь эффекта
+# Which server in the network will the channel move to if proxy mode is enabled
+# Names are taken from the proxy configuration, but the main plugin config must also have correct names!
+# If '' is specified or proxy mode is not enabled - this will have no effect
 server_to_move: ''
-# Сколько игроков должно быть на сервере, чтобы по каналу можно было телепортироваться? (-1 чтобы отключить)
+# How many players should be on the server to teleport via this channel? (-1 to disable)
 min_players_to_use: -1
-# Сколько тиков игрок должен быть неуязвим после телепортации через канал RTP (-1 чтобы отключить)
+# How many ticks should the player be invulnerable after teleportation via RTP channel (-1 to disable)
 invulnerable_after_teleport: 12
-# Какая заготовка будет использована для дальнейших настроек канала? (Указывается в templates.yml)
-# Используется, если какая-либо настройка не указывается в канале на прямую, но должна в нём присутствовать
-# Если указано '' - то это не будет иметь эффекта
+# Which template will be used for further channel settings? (Specified in templates.yml)
+# Used if any setting is not specified directly in the channel, but should be present in it
+# If '' is specified - this will have no effect
 template: ''
-# Отдельные спецификации канала
+# Channel-specific specifications
 specifications:
-  # Телепортировать ли игрока на РТП при первом входе?
+  # Should the player be teleported to RTP on first join?
   teleport_on_first_join: false
-  # Из каких миров должна работать телепортация на РТП из пустоты.
-  # Полезно использовать если нужен телепорт после падения в яму
-  # Если указано [] - не будет телепортировать при падении в пустоту
+  # From which worlds should RTP teleportation from void work.
+  # Useful if you need teleportation after falling into a pit
+  # If [] is specified - will not teleport when falling into void
   void_worlds: []
-  # Уровень пустоты. Если игрок опустится на данную высоту и void_worlds не пуст - он будет телепортирован.
-  # Если не указан - используется ванильное значение уровня пустоты для вашей версии. (0/-60)
+  # Void level. If the player descends to this height and void_worlds is not empty - they will be teleported.
+  # If not specified - vanilla void level value for your version is used. (0/-60)
   void_level: 0
-  # Из каких миров должна работать телепортация на РТП при респавне.
-  # Принцип работы тот же, как у void_worlds
+  # From which worlds should RTP teleportation on respawn work.
+  # Works the same way as void_worlds
   respawn_worlds: []
-# Настройка цены телепортации по данному каналу
+# Teleportation cost settings for this channel
 costs:
-  # Тип используемой валюты
-  # VAULT - будет использован vault api (предполагает наличие менеджера экономики, по типу EssentialsX или CMI)
-  # PLAYERPOINTS - будет использован апи плагина PlayerPoints
+  # Currency type used
+  # VAULT - vault api will be used (assumes an economy manager like EssentialsX or CMI)
+  # PLAYERPOINTS - PlayerPoints plugin api will be used
   money_type: VAULT
-  # Цена телепортации в монетах (-1 чтобы отключить)
+  # Teleportation cost in coins (-1 to disable)
   money_cost: -1
-  # Цена телепортации в единицах голода
+  # Teleportation cost in hunger units
   hunger_cost: -1
-  # Цена телепортации в единицах очков опыта
+  # Teleportation cost in experience points
   experience_cost: -1
-# Принцип выбора локации
+# Location selection principle
 location_generation_options:
-  # Форма заготовки для поиска локации
-  # SQUARE - прямоугольник. При нем min_x/z и max_x/z являются 2мя противоположными сторонами прямоугольника
-  # ROUND - круг. При нем min_x/z и max_x/z являются 2мя противоположными сторонами прямоугольника, через который будет построен круг (или овал), вписывающийся в данный прямоугольник
+  # Shape template for location search
+  # SQUARE - rectangle. min_x/z and max_x/z are 2 opposite sides of the rectangle
+  # ROUND - circle. min_x/z and max_x/z are 2 opposite sides of a rectangle through which a circle (or oval) will be built, inscribed in this rectangle
   shape: SQUARE
-  # Фрмат генерации локации
-  # RECTANGULAR - мы строим одну геометрическую фигуру для генерации локации (строится фигура между max_x/z и min_x/z в зависимости от shape)
-  # RADIAL - строятся геометрические 2 фигуры, между которыми создаётся зона телепортации (строятся фигуры с максимальным max_x/z и минимальным min_x/z радиусами от center_x/z)
+  # Location generation format
+  # RECTANGULAR - we build one geometric figure for location generation (figure is built between max_x/z and min_x/z depending on shape)
+  # RADIAL - two geometric figures are built, between which a teleportation zone is created (figures are built with maximum max_x/z and minimum min_x/z radii from center_x/z)
   gen_format: RECTANGULAR
-  # Координаты
+  # Coordinates
   min_x: -1000
   max_x: 1000
   min_z: -1000
   max_z: 1000
-  # Координаты при работе с форматом генерации RADIAL
+  # Coordinates when working with RADIAL generation format
   center_x: 0
   center_z: 0
-  # Координаты при работе с NEAR_<ЧТО-ТО>
-  # Какое может быть самое близкое и самое далёкое расстояние от точки локации исходного объекта
+  # Coordinates when working with NEAR_<SOMETHING>
+  # What can be the closest and farthest distance from the source object's location point
   min_near_point_distance: 30
   max_near_point_distance: 60
-  # Максимальное кол-во попыток найти локацию для телепорта (нужно, чтобы не застрять в бесконечном цикле поиска локации)
+  # Maximum number of attempts to find a location for teleport (needed to avoid getting stuck in an infinite location search loop)
   max_location_attempts: 50
-# Настройки кулдаунов
+# Cooldown settings
 cooldown:
-  # Дефолтный кулдаун для телепортации (-1 чтобы отключить)
+  # Default cooldown for teleportation (-1 to disable)
   default_cooldown: 60
-  # Кулдауны на телепортации в секундах для каждой группы (Поставьте [] чтобы отключить кулдауны для групп вообще, -1 чтобы отключить кулдаун для группы)
+  # Teleportation cooldowns in seconds for each group (Set [] to disable group cooldowns entirely, -1 to disable cooldown for a group)
   group_cooldowns:
     vip: 30
     premium: 10
-  # Кулдаун до телепортации (-1 чтобы отключить)
+  # Pre-teleportation cooldown (-1 to disable)
   default_pre_teleport_cooldown: 5
-  # Кулдауны до телепортации в секундах для каждой группы (Поставьте [] чтобы отключить кулдауны для групп вообще, -1 чтобы отключить кулдаун для группы)
+  # Pre-teleportation cooldowns in seconds for each group (Set [] to disable group cooldowns entirely, -1 to disable cooldown for a group)
   pre_teleport_group_cooldowns:
     vip: 1
-  # Если группа игрока не указана в списке, то будет браться кулдаун для самой последней группы из списка, вместо дефолтного
+  # If the player's group is not in the list, the cooldown for the last group in the list will be used instead of the default
   use_last_group_cooldown: false
-# Настройка боссбара обратного отсчета
-# Не активен, если кулдаун до телепортации < 0
+# Countdown bossbar settings
+# Not active if pre-teleportation cooldown < 0
 bossbar:
-  # Включен ли боссбар
+  # Is bossbar enabled
   enabled: true
-  # Настройки боссбара
-  # Доступные цвета боссбара: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
-  # Доступные стили боссбара: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html
-  title: '&fТелепортация через: &5%time%'
+  # Bossbar settings
+  # Available bossbar colors: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+  # Available bossbar styles: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html
+  title: '&fTeleportation in: &5%time%'
   color: WHITE
   style: SEGMENTED_12
-# Настройка партиклов
+# Particle settings
 particles:
-  # Настройка анимации до телепорта
-  # Не активна, если кулдаун до телепортации < 0
+  # Pre-teleport animation settings
+  # Not active if pre-teleportation cooldown < 0
   pre_teleport:
-    # Включены ли партиклы
+    # Are particles enabled
     enabled: false
-    # Нужно ли отправлять партиклы только игроку, который телепортируется?
+    # Should particles be sent only to the player who is teleporting?
     send_only_to_player: true
-    # Какие будут партиклы в анимации
-    # Будут по порядку
+    # What particles will be in the animation
+    # Will be in order
     id:
       - FLAME
-    # Сколько будет изначальных точек отсчета для анимации
+    # How many initial reference points will there be for the animation
     dots: 2
-    # На каком расстоянии от игрока будут появляться партиклы
+    # At what distance from the player will particles appear
     radius: 1.25
-    # Как быстро должны разлетаться партиклы (0.0 чтобы они были статичными)
+    # How fast should particles scatter (0.0 for them to be static)
     particle_speed: 0.0
-    # Какова будет скорость анимации
+    # What will be the animation speed
     speed: 4.0
-    # Должна ли анимация быть инвертированной
-    # Против часовой, а не по часовой и не сверху вниз, а снизу вверх (в случае если jumping: false)
+    # Should the animation be inverted
+    # Counter-clockwise instead of clockwise and not top to bottom, but bottom to top (if jumping: false)
     invert: false
-    # Должна ли анимация быть "прыгающей"
+    # Should the animation be "jumping"
     jumping: true
-    # Должна ли анимация приближаться к игроку? (invert не применяется к данному параметру)
+    # Should the animation approach the player? (invert does not apply to this parameter)
     move_near: true
-  # Настройка партиклов после телепорта
+  # Post-teleport particle settings
   after_teleport:
-    # Включены ли партиклы
+    # Are particles enabled
     enabled: true
-    # Нужно ли отправлять партиклы только игроку, который телепортируется?
+    # Should particles be sent only to the player who is teleporting?
     send_only_to_player: true
-    # Какой будет партикл
+    # What particle will it be
     id: CLOUD
-    # Сколько их будет
+    # How many will there be
     count: 45
-    # На каком расстоянии от игрока будут появляться партиклы
+    # At what distance from the player will particles appear
     radius: 1.25
-    # Как быстро должны разлетаться партиклы (0.0 чтобы они были статичными)
+    # How fast should particles scatter (0.0 for them to be static)
     particle_speed: 0.0
-# Запреты, которые накладываются на игрока перед телепортацией
-# Не активны, если кулдаун до телепортации < 0
+# Restrictions imposed on the player before teleportation
+# Not active if pre-teleportation cooldown < 0
 restrictions:
-  # Запрет движения до рандомного телепорта
+  # Movement restriction before random teleport
   move: true
-  # Запрет телепортации до рандомного телепорта (учитывается любой телепорт кроме плагинов)
+  # Teleportation restriction before random teleport (any teleport except plugins is considered)
   teleport: true
-  # Запрет получения урона до рандомного телепорта
+  # Damage restriction before random teleport
   damage: true
-  # Запрет нанесения урона другим существам
+  # Restriction on dealing damage to other creatures
   damage_others: false
-  # Если эта функция включена - проверка урона будет применяться только если урон был причинен одним игроком другому
+  # If this feature is enabled - damage check will only apply if damage was caused by one player to another
   damage_check_only_players: true
-# Различные исключения телепортации
+# Various teleportation exceptions
 avoid:
-  # Блоки на которе игрока нельзя/можно будет телепортировать
-  # Чтобы отключить проверку - поставьте list: []
+  # Blocks on which the player cannot/can teleport
+  # To disable the check - set list: []
   blocks:
-    # Режим работы.
-    # true - на эти блоки нельзя телепортировать false - можно телепортировать только на эти блоки
+    # Operation mode.
+    # true - cannot teleport on these blocks false - can only teleport on these blocks
     blacklist: true
     list:
       - 'LAVA'
       - 'WATER'
-  # Биомы в которых игрока нельзя/можно будет телепортировать
-  # Чтобы отключить проверку - поставьте list: []
+  # Biomes in which the player cannot/can teleport
+  # To disable the check - set list: []
   biomes:
-    # Режим работы.
-    # true - в эти биомы нельзя телепортировать false - можно телепортировать только в эти биомы
+    # Operation mode.
+    # true - cannot teleport in these biomes false - can only teleport in these biomes
     blacklist: true
     list:
       - 'OCEAN'
-  # Блокировать ли телепортацию игрока в регионы WorldGuard
+  # Should player teleportation to WorldGuard regions be blocked
   regions: true
-  # Блокировать ли телепортацию игрока в города Towny
+  # Should player teleportation to Towny towns be blocked
   towns: false
-# Действия при телепортации
-# Доступные действия:
-# [MESSAGE] <сообщение> - отправить сообщение игроку (поддерживает PlaceholderAPI, если включён)
-# [ACTIONBAR] <сообщение> - отправить сообщение игроку в экшн-бар
-# [SOUND] <id>;<громкость>;<тон> - отправить звук игроку
-# [TITLE] <тайтл>;<субтайтл>;<время_появления>;<время_показа>;<время_пропадания> - отправить тайтл игроку
-# [EFFECT] <эффект>;<время>;<уровень> - выдать эффект игроку
-# [CONSOLE] <команда> - выполнить команду от консоли
+# Actions during teleportation
+# Available actions:
+# [MESSAGE] <message> - send a message to the player (supports PlaceholderAPI if enabled)
+# [ACTIONBAR] <message> - send a message to the player in the action bar
+# [SOUND] <id>;<volume>;<pitch> - send a sound to the player
+# [TITLE] <title>;<subtitle>;<fade_in>;<stay>;<fade_out> - send a title to the player
+# [EFFECT] <effect>;<duration>;<amplifier> - give an effect to the player
+# [CONSOLE] <command> - execute a command from console
 actions:
-  # Формат хекса - &#IIIDDD
-  # Доступные плейсхолдеры
-  # %player% - ник игрока
-  # %name% - имя канала телепортации
-  # %time% - время до телепортации
-  # %x% %y% %z% - координаты локации
-  # Для [MESSAGE] доступен ховертекст и клик-ивент. Указывать через hoverText={Текст-при-наведении} и clickEvent={айди-действия;действие-при-клике}
-  # Доступные действия для clickEvent: https://www.javadoc.io/static/net.kyori/adventure-api/4.17.0/net/kyori/adventure/text/event/ClickEvent.Action.html
-  # Также для [MESSAGE] доступны кнопки. Создаются при помощи button={Текст-кнопки;Действие1;Действие2}. Действия 1 и 2 - hoverText и clickEvent соответственно.
+  # Hex format - &#IIIDDD
+  # Available placeholders
+  # %player% - player nickname
+  # %name% - teleport channel name
+  # %time% - time until teleportation
+  # %x% %y% %z% - location coordinates
+  # For [MESSAGE] hover text and click event are available. Specify via hoverText={Text-on-hover} and clickEvent={action-id;action-on-click}
+  # Available actions for clickEvent: https://www.javadoc.io/static/net.kyori/adventure-api/4.17.0/net/kyori/adventure/text/event/ClickEvent.Action.html
+  # Also for [MESSAGE] buttons are available. Created using button={Button-text;Action1;Action2}. Actions 1 and 2 are hoverText and clickEvent respectively.
   pre_teleport:
-    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &fВы будете телепортированы через %time% Не двигайтесь и не получайте урона. &6(Отменить РТП - /rtp cancel)'
+    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &fYou will be teleported in %time% Do not move or take damage. &6(Cancel RTP - /rtp cancel)'
     - '[SOUND] BLOCK_NOTE_BLOCK_PLING;1;1'
   on_cooldown:
     3:
-      - '[TITLE] &aТелепорт через &e3...;&r;5;50;10'
+      - '[TITLE] &aTeleport in &e3...;&r;5;50;10'
     2:
-      - '[TITLE] &aТелепорт через &62...;&r;5;50;10'
+      - '[TITLE] &aTeleport in &62...;&r;5;50;10'
     1:
-      - '[TITLE] &aТелепорт через &c1...;&r;5;50;10'
+      - '[TITLE] &aTeleport in &c1...;&r;5;50;10'
   after_teleport:
-    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aУспешная телепортация! &fВы телепортировались на координаты: &2%x% %y% %z%.'
-    - '[TITLE] &a&lУспех!;&fВы телепортировались на координаты: &2%x% %y% %z%.'
+    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aSuccessful teleportation! &fYou teleported to coordinates: &2%x% %y% %z%.'
+    - '[TITLE] &a&lSuccess!;&fYou teleported to coordinates: &2%x% %y% %z%.'
     - '[SOUND] ENTITY_PLAYER_LEVELUP;1;1'

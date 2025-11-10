@@ -1,9 +1,9 @@
-name: 'Возле баз'
+name: 'Near Bases'
 type: NEAR_REGION
 active_worlds:
   - 'world'
 costs:
-  # По умолчанию - VAULT
+  # Default - VAULT
   money_type: PLAYERPOINTS
   money_cost: 100
 location_generation_options:
@@ -20,9 +20,9 @@ restrictions:
 actions:
   pre_teleport: []
   after_teleport:
-    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aУспешная телепортация! &fВы телепортировались на координаты: &2%x% %y% %z%.'
-    - '[TITLE] &a&lУспех!;&fВы телепортировались на координаты: &2%x% %y% %z%.'
+    - '[MESSAGE] &7&l(&5&lMSTRandomTeleport&7&l) &6» &aSuccessful teleportation! &fYou teleported to coordinates: &2%x% %y% %z%.'
+    - '[TITLE] &a&lSuccess!;&fYou teleported to coordinates: &2%x% %y% %z%.'
     - '[SOUND] ENTITY_PLAYER_LEVELUP;1;1'
 messages:
   prefix: '&7&l(&5&lMSTRandomTeleport+&7&l) &6»&r'
-  no_perms: '%prefix% &cУ вас не достаточно прав на использование канала телепортации к базам.'
+  no_perms: '%prefix% &cYou do not have permission to use the teleport channel to bases.'

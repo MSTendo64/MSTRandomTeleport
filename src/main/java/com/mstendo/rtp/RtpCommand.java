@@ -41,7 +41,7 @@ public class RtpCommand implements TabExecutor {
   public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
     this.rtpManager.printDebug("Command executed: " + label + " by " + sender.getName() + " with args: " + java.util.Arrays.toString(args));
     if (!(sender instanceof Player) && (args.length == 0 || !args[0].equalsIgnoreCase("admin"))) {
-      this.plugin.getPluginLogger().info("Вы должны быть игроком!");
+      this.plugin.getPluginLogger().info(this.pluginConfig.getConsoleMessage("must_be_player", "You must be a player!"));
       return true;
     } 
     if (args.length == 0) {
@@ -199,7 +199,10 @@ public class RtpCommand implements TabExecutor {
         return;
       case "debug":
         Utils.DEBUG = !Utils.DEBUG;
-        message = "§7Дебаг переключен в значение: " + (Utils.DEBUG ? "§a" : "§c") + Utils.DEBUG;
+        String statusColor = Utils.DEBUG ? "a" : "c";
+        message = this.pluginConfig.getConsoleMessage("debug_toggled", "&7Debug toggled to: &%status%%value%")
+            .replace("%status%", statusColor)
+            .replace("%value%", String.valueOf(Utils.DEBUG));
         sender.sendMessage(message);
         return;
     } 
@@ -208,7 +211,8 @@ public class RtpCommand implements TabExecutor {
   
   public void checkAndUpdatePlugin(CommandSender sender, MSTRandomTeleport plugin) {
     Bukkit.getScheduler().runTaskAsynchronously((Plugin)plugin, () -> Utils.checkUpdates(plugin, version -> {
-      sender.sendMessage("§aПроверка обновлений завершена. Версия: " + version);
+      sender.sendMessage(this.pluginConfig.getConsoleMessage("update_check_complete", "&aUpdate check completed. Version: &b%version%")
+          .replace("%version%", version));
     }));
   }
   
@@ -232,7 +236,10 @@ public class RtpCommand implements TabExecutor {
             lastPercentage = progressPercentage;
             int downloadedKB = totalBytesRead / 1024;
             int fullSizeKB = fileSize / 1024;
-            sender.sendMessage("§aЗагрузка: " + downloadedKB + "/" + fullSizeKB + "KB (" + progressPercentage + "%)");
+            sender.sendMessage(this.pluginConfig.getConsoleMessage("download_progress", "&aDownloading: &e%downloaded%KB&7/&e%total%KB &7(&e%percentage%&7%)")
+                .replace("%downloaded%", String.valueOf(downloadedKB))
+                .replace("%total%", String.valueOf(fullSizeKB))
+                .replace("%percentage%", String.valueOf(progressPercentage)));
           } 
         } 
         out.close();
