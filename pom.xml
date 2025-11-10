@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mstendo</groupId>
+  <artifactId>MSTRandomTeleport</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <name>MSTRandomTeleport</name>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <relocations>
+                <!-- Relocate Caffeine (used via reflection, safe to relocate) -->
+                <relocation>
+                  <pattern>com.github.benmanes.caffeine</pattern>
+                  <shadedPattern>com.mstendo.rtp.libs.caffeine</shadedPattern>
+                </relocation>
+                <!-- FastUtil and Apache Commons Math are NOT relocated - used directly in code -->
+              </relocations>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+
+  <repositories>
+      <!-- EngineHub Repository (для WorldGuard) -->
+      <repository>
+          <id>enginehub</id>
+          <url>https://maven.enginehub.org/repo/</url>
+      </repository>
+      <!-- Spigot Repository -->
+      <repository>
+          <id>spigot-repo</id>
+          <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+      </repository>
+
+      <repository>
+          <id>papermc-repo</id>
+          <url>https://repo.papermc.io/repository/maven-public/</url>
+      </repository>
+      <repository>
+          <id>sonatype</id>
+          <url>https://oss.sonatype.org/content/groups/public/</url>
+      </repository>
+      <!-- PlaceholderAPI Repository -->
+      <repository>
+          <id>placeholderapi</id>
+          <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+      </repository>
+      <!-- Vault Repository -->
+      <repository>
+          <id>jitpack.io</id>
+          <url>https://jitpack.io</url>
+      </repository>
+  </repositories>
+
+  <dependencies>
+      <!-- Spigot API -->
+      <dependency>
+          <groupId>org.spigotmc</groupId>
+          <artifactId>spigot-api</artifactId>
+          <version>1.16.5-R0.1-SNAPSHOT</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <!-- Lombok -->
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.30</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <!-- FastUtil (shaded into JAR) -->
+      <dependency>
+          <groupId>it.unimi.dsi</groupId>
+          <artifactId>fastutil</artifactId>
+          <version>8.5.12</version>
+      </dependency>
+
+      <!-- Caffeine Cache (shaded into JAR) -->
+      <dependency>
+          <groupId>com.github.ben-manes.caffeine</groupId>
+          <artifactId>caffeine</artifactId>
+          <version>3.1.8</version>
+      </dependency>
+
+      <!-- Apache Commons Math (shaded into JAR) -->
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-math3</artifactId>
+          <version>3.6.1</version>
+      </dependency>
+
+      <!-- Vault API (optional) -->
+      <dependency>
+          <groupId>com.github.MilkBowl</groupId>
+          <artifactId>VaultAPI</artifactId>
+          <version>1.7</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <!-- PlaceholderAPI (optional) -->
+      <dependency>
+          <groupId>me.clip</groupId>
+          <artifactId>placeholderapi</artifactId>
+          <version>2.11.5</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <!-- JetBrains Annotations -->
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>24.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.sk89q.worldguard/worldguard-bukkit -->
+      <dependency>
+          <groupId>com.sk89q.worldguard</groupId>
+          <artifactId>worldguard-bukkit</artifactId>
+          <version>7.0.5</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>com.destroystokyo.paper</groupId>
+          <artifactId>paper-api</artifactId>
+          <version>1.16.5-R0.1-SNAPSHOT</version>
+          <scope>provided</scope>
+      </dependency>
+      
+      <!-- Adventure API (for text components) -->
+      <dependency>
+          <groupId>net.kyori</groupId>
+          <artifactId>adventure-api</artifactId>
+          <version>4.11.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>net.kyori</groupId>
+          <artifactId>adventure-text-serializer-legacy</artifactId>
+          <version>4.11.0</version>
+          <scope>provided</scope>
+      </dependency>
+      
+      <!-- JUnit for testing -->
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter</artifactId>
+          <version>5.9.3</version>
+          <scope>test</scope>
+      </dependency>
+  </dependencies>
+</project>
