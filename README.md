@@ -1,5 +1,5 @@
 # MSTRandomTeleport
-[![Maven Package](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven-publish.yml/badge.svg?branch=master&event=release)](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven-publish.yml)
+[![Java CI with Maven](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml/badge.svg?event=release)](https://github.com/MSTendo64/MSTRandomTeleport/actions/workflows/maven.yml)
 
 **Версия:** 1.13.0  
 **Автор:** mstendo  
