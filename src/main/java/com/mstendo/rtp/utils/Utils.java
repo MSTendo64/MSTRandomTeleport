@@ -87,7 +87,7 @@ public final class Utils {
   public static void checkUpdates(MSTRandomTeleport plugin, Consumer<String> consumer) {
     Bukkit.getScheduler().runTaskLaterAsynchronously((Plugin)plugin, () -> {
           try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader((new URL("https://raw.githubusercontent.com/mstendo/MSTRandomTeleport/master/VERSION")).openStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader((new URL("https://raw.githubusercontent.com/MSTendo64/MSTRandomTeleport/master/VERSION")).openStream()));
             try {
               consumer.accept(reader.readLine().trim());
               reader.close();

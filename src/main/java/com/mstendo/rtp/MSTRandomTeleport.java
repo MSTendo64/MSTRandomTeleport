@@ -134,7 +134,7 @@ public final class MSTRandomTeleport extends JavaPlugin {
           } else {
             this.pluginLogger.info("§aВы используете устаревшую плагина!");
             this.pluginLogger.info("§aВы можете скачать новую версию здесь:");
-            this.pluginLogger.info("§bgithub.com/mstendo/MSTRandomTeleport/releases/");
+            this.pluginLogger.info("§bgithub.com/MSTendo64/MSTRandomTeleport/releases/");
             this.pluginLogger.info("");
             this.pluginLogger.info("§aИли обновите плагин при помощи §b/rtp admin update");
           } 
